@@ -1,0 +1,44 @@
+{
+  "name": "oom-hub",
+  "version": "1.0.0",
+  "description": "Initial test of the oom-hub architecture",
+  "main": "dist/main/oom-hub.min.5.js",
+  "directories": {
+    "example": "support"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+    "test": "node oomtility/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loopdotcoop/oom-hub.git"
+  },
+  "keywords": [
+    "Oom",
+    "🔅",
+    "Interactive",
+    "🌟",
+    "3d",
+    "🍍",
+    "Sequencer",
+    "✨",
+    "Instrument",
+    "🎉",
+    "Seqin",
+    "🔸",
+    "Web Audio"
+  ],
+  "author": "Rich Plastow <rich@richplastow.com> (https://richplastow.com/)",
+  "contributors": [
+    "Loop.Coop <info@loop.coop> (https://loop.coop/)"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/loopdotcoop/oom-hub/issues"
+  },
+  "homepage": "http://oom-hub.loop.coop/"
+}

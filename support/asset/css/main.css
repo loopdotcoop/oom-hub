@@ -1,0 +1,36 @@
+/*// OomHub //// 1.0.0 //// January 2018 //// http://oom-hub.loop.coop/ //////*/
+
+/* FONTS */
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+}
+pre, tt, code, kbd, samp, var {
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+
+/* COLOURS */
+
+body {
+    background: #339900;
+}
+.container {
+    background: #fff;
+}
+
+
+
+
+/* HOMEPAGE */
+
+#logo {
+    display: block;
+    width: 60%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+

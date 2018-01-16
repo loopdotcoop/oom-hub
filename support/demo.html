@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+
+
+
+
+<!-- META -->
+
+<!-- Technical meta -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+   content="width=device-width, initial-scale=1.0, shrink-to-fit=no,
+            maximum-scale=1.0, user-scalable=no">
+
+<!-- Search engine meta -->
+<title>OomHub Demo</title>
+<meta name="description"
+   content="Usage examples for ‘OomHub’.">
+<link rel="author" href="../README.md">
+
+<!-- Twitter Card, and Open Graph for Facebook, LinkedIn, Google+, etc -->
+<meta name="twitter:card"    content="summary">
+<meta name="twitter:site"    content="@loopdotcoop">
+<meta name="twitter:creator" content="@richplastow">
+<meta property="og:type"     content="website">
+<meta property="og:locale"   content="en_GB">
+<meta property="og:title"    content="OomHub Demo">
+<meta property="og:url"      content="http://oom-hub.loop.coop/">
+<meta property="og:image"
+       content="http://oom-hub.loop.coop/support/asset/logo/logo-1200x1200.svg">
+<meta property="og:description"
+       content="Usage examples for ‘OomHub’.">
+
+<!-- From realfavicongenerator.net - see README.md for settings -->
+<link rel="apple-touch-icon" sizes="180x180" href="asset/icon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="96x96" href="asset/icon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="32x32" href="asset/icon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="asset/icon/favicon-16x16.png">
+<link rel="manifest"                  href="asset/icon/manifest.json">
+<link rel="mask-icon" color="#339900" href="asset/icon/safari-pinned-tab.svg">
+<link rel="shortcut icon"             href="asset/icon/favicon.ico">
+<meta name="apple-mobile-web-app-title" content="OomHub Demo">
+<meta name="application-name"           content="OomHub Demo">
+<meta name="msapplication-config"       content="asset/icon/browserconfig.xml">
+<meta name="theme-color"                content="#339900">
+
+
+
+
+<!-- STYLE -->
+
+<!-- Load fonts as soon as possible -->
+<style>
+@font-face { font-family: 'Ubuntu'; font-weight: 400; font-style: normal;
+  src: local('Ubuntu Regular'), local('Ubuntu-Regular')
+    , url(asset/font/ubuntu-regular.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA
+    , U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
+}
+@font-face { font-family: 'Ubuntu'; font-weight: 400; font-style: italic;
+  src: local('Ubuntu Italic'), local('Ubuntu-Italic')
+    , url(asset/font/ubuntu-italic.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA
+    , U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
+}
+@font-face { font-family: 'Ubuntu'; font-weight: 700; font-style: normal;
+  src: local('Ubuntu Bold'), local('Ubuntu-Bold')
+    , url(asset/font/ubuntu-bold.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA
+    , U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
+}
+@font-face { font-family: 'Ubuntu'; font-weight: 700; font-style: italic;
+  src: local('Ubuntu Bold Italic'), local('Ubuntu-BoldItalic')
+    , url(asset/font/ubuntu-bolditalic.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA
+    , U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
+}
+@font-face { font-family: 'Ubuntu Mono'; font-weight: 400; font-style: normal;
+  src: local('Ubuntu Mono'), local('UbuntuMono-Regular')
+    , url(asset/font/ubuntumono-regular.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA
+    , U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
+}
+</style>
+
+<!-- Load styles -->
+<link rel="stylesheet" href="asset/css/bootstrap.min.css">
+<link rel="stylesheet" href="asset/css/main.css">
+
+
+</head>
+<body>
+<div class="container">
+
+
+
+<!-- HEADER -->
+
+<!-- Dropdown menu to select JavaScript standard -->
+<select id="ecmaswitch" onchange="document.cookie=
+  'ecmaswitch='+this.options[this.selectedIndex].value;location.reload()">
+  <option value="~0~">ctrl-alt-0: ES5 Production</option><!-- default -->
+  <option value="~1~">ctrl-alt-1: ES5 Minified</option>
+  <option value="~2~">ctrl-alt-2: ES6 Production</option>
+  <option value="~3~">ctrl-alt-3: ES6 Development</option>
+  <script>!function(d,S,m,s){m=d.scripts[0].parentNode,s=~~d.cookie.split('~')[1
+  ],m[S]=s,d.addEventListener('keypress',function(e){s=e.charCode-48;if(0<=s&&4>
+  s&&e.ctrlKey&&e.altKey)m[S]=s,m.dispatchEvent(new Event('change'))})}(document
+  ,'selectedIndex')</script>
+</select>
+
+<!-- Header and Navigation menu -->
+<h1>OomHub Demo
+  <span id="version">&hellip;</span> <span id="ecma"></span>&nbsp;</h1>
+<nav>
+  <a href="../index.html" id="home-link">Home</a> &nbsp;
+  <a href="test.html">Test</a> &nbsp;
+  <a href="demo.html">Demo</a> &nbsp;
+  <a href="https://github.com/loopdotcoop/oom-hub">Repo</a> &nbsp;
+  <a href="https://www.npmjs.com/package/oom-hub">NPM</a> &nbsp;&nbsp;
+</nav>
+
+<h2>Usage examples for ‘OomHub’.</h2>
+
+<!-- Upgrade message for Internet Explorer 8 and below --><!--[if lte IE 8]>
+<script>document.getElementById('version').innerHTML='Not Supported'</script>
+<h2>Please upgrade to Internet Explorer 9 or higher</h2><![endif]-->
+<!-- Begin hiding from IE 8 and below --><!--[if gte IE 9 | !IE ]><!-->
+
+
+
+
+<!-- CONTENT -->
+
+
+<!-- BEGIN DYNAMIC SECTION /////////////////////////////////////////////////////
+  //// This dynamic section is kept up to date by ‘oomtility/make.js’ ////// -->
+
+<!-- END DYNAMIC SECTION ///////////////////////////////////////////////// -->
+
+<!-- Load the proper format scripts, according to the '#ecmaswitch' menu -->
+<script src="asset/js/ecmaswitch.js"></script>
+<script>ECMASwitch.load('../')</script>
+
+
+
+<!-- Display the repo version and JavaScript standard -->
+<script>$('#version').html(OOM.OomHub.VERSION||'(no VERSION)')
+$('#ecma').html('ES'+['5','5 min','6','6 dev'][~~document.cookie.split('~')[1]])
+</script>
+
+<!-- End hiding from Internet Explorer 8 and below --><!--<![endif]-->
+
+</div><!--.container -->
+</body>
+</html>
