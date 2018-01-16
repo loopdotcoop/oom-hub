@@ -3,9 +3,9 @@
   'use strict';
   var META = {
     NAME: {value: 'OomHub'},
-    VERSION: {value: '1.0.0'},
+    VERSION: {value: '1.0.1'},
     HOMEPAGE: {value: 'http://oom-hub.loop.coop/'},
-    REMARKS: {value: 'Initial test of the oom-hub architecture'}
+    REMARKS: {value: 'The event hub at the centre of Oom'}
   };
   var OOM = ROOT.OOM = ROOT.OOM || {};
   var TOOLKIT = OOM.TOOLKIT = OOM.TOOLKIT || {};
@@ -135,4 +135,4 @@
 
 
 
-//\\//\\ built by Oomtility Make 1.0.6 //\\//\\ http://oomtility.loop.coop //\\//\\
+//\\//\\ built by Oomtility Make 1.0.8 //\\//\\ http://oomtility.loop.coop //\\//\\

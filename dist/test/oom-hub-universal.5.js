@@ -8,7 +8,7 @@ jQuery(function($) {
     var Class = OOM.OomHub;
     is('function' === typeof Class, 'OomHub is a function');
     is('OomHub' === Class.NAME, 'NAME as expected');
-    is('1.0.0' === Class.VERSION, 'VERSION as expected');
+    is('1.0.1' === Class.VERSION, 'VERSION as expected');
     is('http://oom-hub.loop.coop/' === Class.HOMEPAGE, 'HOMEPAGE as expected');
   });
 });
@@ -17,4 +17,4 @@ jQuery(function($) {
 
 
 
-//\\//\\ built by Oomtility Make 1.0.6 //\\//\\ http://oomtility.loop.coop //\\//\\
+//\\//\\ built by Oomtility Make 1.0.8 //\\//\\ http://oomtility.loop.coop //\\//\\

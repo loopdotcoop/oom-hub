@@ -1,4 +1,4 @@
-//// OomHub //// 1.0.6 //// January 2018 //// https://oom-hub.loop.coop/ ///////
+//// OomHub //// 1.0.8 //// January 2018 //// https://oom-hub.loop.coop/ ///////
 
 if ('function' !== typeof require) {
     console.warn('test.js must be run using Node.js, eg:\n  $ node test.js')

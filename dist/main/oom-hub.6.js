@@ -2,15 +2,15 @@
 
 
 
-//// OomHub //// 1.0.0 //// January 2018 //// http://oom-hub.loop.coop/ ////////
+//// OomHub //// 1.0.1 //// January 2018 //// http://oom-hub.loop.coop/ ////////
 
 !function (ROOT) { 'use strict'
 
 const META = {
     NAME:     { value:'OomHub' }
-  , VERSION:  { value:'1.0.0' }
+  , VERSION:  { value:'1.0.1' } // OOMBUMPABLE
   , HOMEPAGE: { value:'http://oom-hub.loop.coop/' }
-  , REMARKS:  { value:'Initial test of the oom-hub architecture' }
+  , REMARKS:  { value:'The event hub at the centre of Oom' }
 }
 
 
@@ -213,4 +213,4 @@ function rndCh (s, e) { return String.fromCharCode(Math.random() * (e-s) + s) }
 
 
 
-//\\//\\ built by Oomtility Make 1.0.6 //\\//\\ http://oomtility.loop.coop //\\//\\
+//\\//\\ built by Oomtility Make 1.0.8 //\\//\\ http://oomtility.loop.coop //\\//\\

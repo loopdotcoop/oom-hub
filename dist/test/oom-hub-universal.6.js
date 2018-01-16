@@ -2,7 +2,7 @@
 
 
 
-//// OomHub //// 1.0.0 //// January 2018 //// http://oom-hub.loop.coop/ ////////
+//// OomHub //// 1.0.1 //// January 2018 //// http://oom-hub.loop.coop/ ////////
 
 //// Node.js: 7.2.0
 //// Rhino:   @TODO get Rhino working
@@ -29,7 +29,7 @@ test('The OomHub class', () => {
     is('function' === typeof Class, 'OomHub is a function')
 
     is('OomHub' === Class.NAME, 'NAME as expected')
-    is('1.0.0' === Class.VERSION, 'VERSION as expected')
+    is('1.0.1' === Class.VERSION, 'VERSION as expected') // OOMBUMPABLE
     is('http://oom-hub.loop.coop/' === Class.HOMEPAGE, 'HOMEPAGE as expected')
 })
 
@@ -42,4 +42,4 @@ test('The OomHub class', () => {
 
 
 
-//\\//\\ built by Oomtility Make 1.0.6 //\\//\\ http://oomtility.loop.coop //\\//\\
+//\\//\\ built by Oomtility Make 1.0.8 //\\//\\ http://oomtility.loop.coop //\\//\\

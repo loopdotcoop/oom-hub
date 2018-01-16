@@ -1,7 +1,7 @@
 !function () { 'use strict'
 
 const NAME     = 'Oomtility Lib'
-    , VERSION  = '1.0.6'
+    , VERSION  = '1.0.8'
     , HOMEPAGE = 'http://oomtility.loop.coop'
 
 
@@ -198,7 +198,7 @@ module.exports.getApp6Js = function (config) {
 
 const META = {
     NAME:     { value:'${classname}' }
-  , VERSION:  { value:'${version}' }
+  , VERSION:  { value:'${version}' } // OOMBUMPABLE
   , HOMEPAGE: { value:'${homepage}' }
   , REMARKS:  { value:'${remarks}' }
 }
@@ -439,7 +439,7 @@ test('The ${classname} class', () => {
     is('function' === typeof Class, '${classname} is a function')
 
     is('${classname}' === Class.NAME, 'NAME as expected')
-    is('${version  }' === Class.VERSION, 'VERSION as expected')
+    is('${version  }' === Class.VERSION, 'VERSION as expected') // OOMBUMPABLE
     is('${homepage }' === Class.HOMEPAGE, 'HOMEPAGE as expected')
 })
 
@@ -527,7 +527,7 @@ module.exports.getTestHtml = function (config) {
 
 
 module.exports.getMainCss = function (config) {
-    return `/*${config.topline.slice(2,-2)}*/
+    return `
 
 /* FONTS */
 
@@ -602,14 +602,14 @@ module.exports.getEcmaswitchJs = function (config) {
         projectLC
     } = config
     return '//// '
-+ `ECMASwitch //// 1.0.6 //// January 2018 //// ecmaswitch.loop.coop/ ////////
++ `ECMASwitch //// 1.0.8 //// January 2018 //// ecmaswitch.loop.coop/ ////////
 
 !function (ROOT) { 'use strict'
 
 //// Create the namespace-object if it does not already exist and add constants.
 var ECMASwitch = ROOT.ECMASwitch = ROOT.ECMASwitch || {}
 ECMASwitch.NAME     = 'ECMASwitch'
-ECMASwitch.VERSION  = '1.0.6'
+ECMASwitch.VERSION  = '1.0.8'
 ECMASwitch.HOMEPAGE = 'http://ecmaswitch.loop.coop/'
 
 //// Polyfill \`document\` for non-browser contexts.
@@ -750,8 +750,8 @@ module.exports.getREADMEMd = function (config) {
 
 #### ${description}
 
-+ __Last update:__  ${date}
-+ __Version:__      ${version}
++ __Last update:__  ${date} <!-- OOMBUMPABLE -->
++ __Version:__      ${version} <!-- OOMBUMPABLE -->
 
 [Homepage](${homepage}) &nbsp;
 [Repo](${repo}) &nbsp;
