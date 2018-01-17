@@ -1,10 +1,10 @@
-//// OomHub //// 1.0.1 //// January 2018 //// http://oom-hub.loop.coop/ ////////
+//// OomHub //// 1.0.2 //// January 2018 //// http://oom-hub.loop.coop/ ////////
 
 !function (ROOT) { 'use strict'
 
 const META = {
     NAME:     { value:'OomHub' }
-  , VERSION:  { value:'1.0.1' } // OOMBUMPABLE
+  , VERSION:  { value:'1.0.2' } // OOMBUMPABLE
   , HOMEPAGE: { value:'http://oom-hub.loop.coop/' }
   , REMARKS:  { value:'The event hub at the centre of Oom' }
 }

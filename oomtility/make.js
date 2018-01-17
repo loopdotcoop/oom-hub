@@ -1,11 +1,11 @@
 !function () { 'use strict'
 
 const NAME     = 'Oomtility Make'
-    , VERSION  = '1.0.8'
+    , VERSION  = '1.0.11'
     , HOMEPAGE = 'http://oomtility.loop.coop'
 
-    , BYLINE   = `\n\n\n\n//\\\\//\\\\ built by ${NAME} ${VERSION}`
-                       + ` //\\\\//\\\\ ${HOMEPAGE} //\\\\//\\\\\n`
+    , BYLINE   = (`\n\n\n\n//// Made by ${NAME} ${VERSION} //\\\\//\\\\ `
+               + `${HOMEPAGE} /////////////////////////////`).slice(0,84) + '\n'
     , HELP =
 `
 ${NAME} ${VERSION}
@@ -60,12 +60,12 @@ This script belongs to ${HOMEPAGE}
 
 
 //// Validate the environment.
-const nodePath   = process.argv.shift()
-const scriptPath = process.argv.shift()
-if ( '/oomtility/make.js' !== scriptPath.slice(-18) )
+const nodePath = process.argv.shift()
+const selfPath = process.argv.shift()
+if ( '/oomtility/make.js' !== selfPath.slice(-18) )
     return console.warn('Unexpected environment!')
-if ( ( process.cwd() !== scriptPath.slice(0,-18) ) )
-    return console.warn('Unexpected CWD, try:\n  $ cd /path/to/your/oom/repo/')
+if ( ( process.cwd() !== selfPath.slice(0,-18) ) )
+    return console.warn(`Unexpected CWD, try:\n  $ cd ${selfPath.slice(0,-18)}`)
 if ('function' !== typeof require)
     return console.warn('Use Node.js instead:\n  $ node oomtility/make.js')
 
@@ -83,6 +83,7 @@ const fs = require('fs')
 //// Set constants.
 const topline = (fs.readFileSync(`src/main/App.6.js`)+'').split('\n')[0]
 const projectTC = topline.split(' ')[1]          // titlecase, eg 'FooBar'
+const projectV  = topline.split(' ')[3]          // titlecase, eg '1.2.3'
 const projectLC = process.cwd().split('/').pop() // lowercase, eg 'foo-bar'
 const projectNH = projectLC.replace(/-/g,'')     // no hyphens, eg 'foobar'
 if ( projectLC.toLowerCase() != projectLC) return console.warn(
@@ -95,7 +96,7 @@ Array.prototype.move = function(from, to) { // stackoverflow.com/a/7180095
     this.splice(to, 0, this.splice(from, 1)[0]) }
 
 //// Declare variables.
-let opt, es6, es5, min, mains, demos, tests, pos, names
+let opt, es6, es5, min, mains, demos, tests, pos, names, writeFileTally = 0
 
 //// Deal with command-line options.
 while ( opt = process.argv.shift() ) {
@@ -127,21 +128,28 @@ mains.forEach( name => {
     es6.push( fs.readFileSync('src/main/' + name)+'' )
 })
 es6 = es6.join('\n\n\n\n') + BYLINE
-fs.writeFileSync( `dist/main/${projectLC}.6.js`, es6 )
+writeFileSyncAndTally( `dist/main/${projectLC}.6.js`, es6 )
 
 
 //// 2. Transpile the new ‘project.6.js’ to ‘project.5.js’
-es5 = traceur.compile(es6, { blockBinding:true }) + BYLINE
+es5 = traceur.compile(es6, { blockBinding:true })
 es5 = es5.replace( // correct a traceur error
     /efined' : \$traceurRuntime\.typeof\(global\)\) \? global : \(void 0\)\);/g
   , "efined' : $traceurRuntime.typeof(global)) ? global : this);"
 )
-fs.writeFileSync( `dist/main/${projectLC}.5.js`, es5 )
+es5 = removeSourceMapRef(es5)
+writeFileSyncAndTally(
+    `dist/main/${projectLC}.5.js`
+  , topline + '\n\n' + es5 + BYLINE
+)
 
 
 //// 3. Minify ‘project.5.js’ to ‘project.5.min.js’
 min = uglify.minify( es5, minConfig(`dist/main/${projectLC}.5.min.js`) )
-fs.writeFileSync( `dist/main/${projectLC}.5.min.js`, min.code + BYLINE )
+writeFileSyncAndTally(
+    `dist/main/${projectLC}.5.min.js`
+  , topline + '\n\n' + min.code + BYLINE
+)
 
 
 
@@ -165,16 +173,20 @@ demos.forEach( name => {
     )
     names.push( name.slice(0,-5).toLowerCase() ) // 'Ok-demo.6.js' -> 'ok-demo'
 })
-es6.forEach( (orig, i) =>
-    fs.writeFileSync( `dist/demo/${names[i]}.6.js`, orig + BYLINE )
-)
+es6.forEach( (orig, i) => {
+    writeFileSyncAndTally( `dist/demo/${names[i]}.6.js`, orig + BYLINE )
+    })
 
 
 //// 5. Transpile ES6 files in ‘dist/demo/’ to ES5
 es6.forEach( (orig, i) => {
-    const es5 = traceur.compile(orig, { blockBinding:true })
-    fs.writeFileSync( `dist/demo/${names[i]}.5.js`, es5 + BYLINE )
-})
+    let es5 = traceur.compile(orig, { blockBinding:true })
+    es5 = removeSourceMapRef(es5)
+    writeFileSyncAndTally(
+        `dist/demo/${names[i]}.5.js`
+      , topline + '\n\n' + es5 + BYLINE
+    )
+    })
 
 
 
@@ -203,24 +215,46 @@ tests.forEach( name => {
 })
 
 //// - ‘dist/test/project-browser.6.js’         (can only be run in a browser)
-es6.browser    = es6.browser.join('\n\n\n\n')    + BYLINE
-fs.writeFileSync( `dist/test/${projectLC}-browser.6.js`, es6.browser )
+es6.browser = es6.browser.join('\n\n\n\n')
+writeFileSyncAndTally(
+    `dist/test/${projectLC}-browser.6.js`
+  , (es6.browser || `//// ${projectTC} ${projectV} has no browser tests`)
+      + BYLINE
+)
 
 //// - ‘dist/test/project-nonbrowser.6.js’      (cannot be run in a browser)
-es6.nonbrowser = es6.nonbrowser.join('\n\n\n\n') + BYLINE
-fs.writeFileSync( `dist/test/${projectLC}-nonbrowser.6.js`, es6.nonbrowser )
+es6.nonbrowser = es6.nonbrowser.join('\n\n\n\n')
+writeFileSyncAndTally(
+    `dist/test/${projectLC}-nonbrowser.6.js`
+  , (es6.nonbrowser || `//// ${projectTC} ${projectV} has no nonbrowser tests`)
+      + BYLINE
+)
 
 //// - ‘dist/test/project-universal.6.js’       (can run anywhere)
-es6.universal  = es6.universal.join('\n\n\n\n')  + BYLINE
-fs.writeFileSync( `dist/test/${projectLC}-universal.6.js`, es6.universal )
+es6.universal = es6.universal.join('\n\n\n\n')
+writeFileSyncAndTally(
+    `dist/test/${projectLC}-universal.6.js`
+  , (es6.universal || `//// ${projectTC} ${projectV} has no universal tests`)
+      + BYLINE
+)
 
 
 //// 7. Transpile the ‘browser’ and ‘universal’ files to ES5
 es5 = {}
-es5.browser    = traceur.compile(es6.browser,   { blockBinding:true }) + BYLINE
-fs.writeFileSync( `dist/test/${projectLC}-browser.5.js`, es5.browser )
-es5.universal  = traceur.compile(es6.universal, { blockBinding:true }) + BYLINE
-fs.writeFileSync( `dist/test/${projectLC}-universal.5.js`, es5.universal )
+es5.browser = es6.browser
+  ? topline + '\n\n' + traceur.compile(es6.browser, { blockBinding:true })
+  : `//// ${projectTC} ${projectV} has no browser tests`
+writeFileSyncAndTally(
+    `dist/test/${projectLC}-browser.5.js`
+  , removeSourceMapRef(es5.browser) + BYLINE
+)
+es5.universal = es6.universal
+  ? topline + '\n\n' + traceur.compile(es6.universal, { blockBinding:true })
+  : `//// ${projectTC} ${projectV} has no universal tests`
+writeFileSyncAndTally(
+    `dist/test/${projectLC}-universal.5.js`
+  , removeSourceMapRef(es5.universal) + BYLINE
+)
 
 
 
@@ -237,6 +271,15 @@ updateECMASwitch('support/asset/js/ecmaswitch.js', mains)
 
 //// 3. support/test.html                       ‘Development ES6’ links
 updateTestFile('support/test.html', tests) // `tests` from previous step
+
+
+
+
+//// FINISH
+
+
+//// Show the result.
+console.log(`Made ${writeFileTally} file${1===writeFileTally?'':'s'}`)
 
 
 
@@ -261,7 +304,7 @@ function updateDemoFile (htmlPath, supportPath) {
         if ( 'demo-' != name.slice(0,5) || '.html' != name.slice(-5) ) return
         let i, file = (fs.readFileSync(supportPath+'/'+name)+'').split('\n')
         for (i=0; i<file.length; i++)
-            if (0 < file[i].indexOf('<title>') ) break
+            if (0 <= file[i].indexOf('<title>') ) break
         out.push(`
   <a href="${name}">
   ${i != file.length ? file[i].replace(/title>/g,'b>') : '  Untitled Demo'}
@@ -346,5 +389,20 @@ function minConfig(outFileName) {
         }
     }
 }
+
+//// Remove the pointless line `//# sourceURL=<compile-source>`.
+function removeSourceMapRef (code) {
+    const sourceMapPos = code.lastIndexOf('/'+'/# sourceURL=<compile-source>\n')
+    if (-1 === sourceMapPos)
+        return code // not found
+    return code.slice(0, sourceMapPos)
+}
+
+//// Basic wrapper round `fs.writeFileSync()`, which keeps a tally.
+function writeFileSyncAndTally (path, content) {
+    fs.writeFileSync(path, content)
+    writeFileTally++
+}
+
 
 }()

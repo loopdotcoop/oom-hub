@@ -2,8 +2,8 @@
 
 #### The event hub at the centre of Oom
 
-+ __Last update:__  2018/01/16 <!-- OOMBUMPABLE -->
-+ __Version:__      1.0.1 <!-- OOMBUMPABLE -->
++ __Last update:__  2018/01/17 <!-- OOMBUMPABLE -->
++ __Version:__      1.0.2 <!-- OOMBUMPABLE -->
 
 [Homepage](http://oom-hub.loop.coop/) &nbsp;
 [Repo](https://github.com/loopdotcoop/oom-hub) &nbsp;

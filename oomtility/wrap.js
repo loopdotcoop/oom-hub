@@ -1,7 +1,7 @@
 !function () { 'use strict'
 
 const NAME     = 'Oomtility Wrap'
-    , VERSION  = '1.0.8'
+    , VERSION  = '1.0.11'
     , HOMEPAGE = 'https://oomtility.loop.coop'
     , HELP =
 `
@@ -33,14 +33,14 @@ This script belongs to ${HOMEPAGE}
 
 
 //// Validate the environment.
-const nodePath   = process.argv.shift()
-const scriptPath = process.argv.shift()
-if ( '/oomtility/wrap.js' !== scriptPath.slice(-18) )
+const nodePath = process.argv.shift()
+const selfPath = process.argv.shift()
+if ( '/oomtility/make.js' !== selfPath.slice(-18) )
     return console.warn('Unexpected environment!')
-if ( ( process.cwd() !== scriptPath.slice(0,-18) ) )
-    return console.warn('Unexpected CWD, try:\n  $ cd /path/to/your/oom/repo/')
+if ( ( process.cwd() !== selfPath.slice(0,-18) ) )
+    return console.warn(`Unexpected CWD, try:\n  $ cd ${selfPath.slice(0,-18)}`)
 if ('function' !== typeof require)
-    return console.warn('Use Node.js instead:\n  $ node oomtility/wrap.js')
+    return console.warn('Use Node.js instead:\n  $ node oomtility/make.js')
 
 
 

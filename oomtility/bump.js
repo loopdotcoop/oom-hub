@@ -1,7 +1,7 @@
 !function () { 'use strict'
 
 const NAME     = 'Oomtility Bump'
-    , VERSION  = '1.0.8'
+    , VERSION  = '1.0.11'
     , HOMEPAGE = 'http://oomtility.loop.coop'
 
     , HELP =
@@ -11,7 +11,7 @@ ${'='.repeat( (NAME+VERSION).length+1 )}
 
 This Node.js script increments (bumps) the project’s version wherever it appears
 in the ‘src/’ folder and in ‘package.json’ and ‘README.md’. It searches files
-for lines containing the special string ‘OOMBUMPABLE’, and also checks the top
+for lines containing the special string ‘OOMBUMPABLE’, and also checks the first
 line of ‘src/’ files for the standard Oom topline.
 
 ${NAME} also updates the date in ‘src/’ file toplines and in ‘README.md’.
@@ -51,22 +51,22 @@ Files In ‘src/’
 Options
 -------
 -h  --help      Show this help message
--v  --version   Show the current ${NAME} version
 -1  --major     Increment version from 1.2.3 to 2.0.0
 -2  --minor     Increment version from 1.2.3 to 1.3.0
 -3  --patch     Increment version from 1.2.3 to 1.2.4 (default)
 -s  --set       Set the version to some arbitrary value
+-v  --version   Show the current ${NAME} version
 
 This script belongs to ${HOMEPAGE}
 `
 
 
 //// Validate the environment.
-const nodePath   = process.argv.shift()
-const scriptPath = process.argv.shift()
-if ( '/oomtility/bump.js' !== scriptPath.slice(-18) )
+const nodePath = process.argv.shift()
+const selfPath = process.argv.shift()
+if ( '/oomtility/bump.js' !== selfPath.slice(-18) )
     return console.warn('Unexpected environment!')
-if ( ( process.cwd() !== scriptPath.slice(0,-18) ) )
+if ( ( process.cwd() !== selfPath.slice(0,-18) ) )
     return console.warn('Unexpected CWD, try:\n  $ cd /path/to/your/oom/repo/')
 if ('function' !== typeof require)
     return console.warn('Use Node.js instead:\n  $ node oomtility/bump.js')
@@ -82,6 +82,7 @@ const fs = require('fs')
 
 //// Set constants.
 const rxV = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/
+const rxMth = new RegExp(`^${monthNames().slice(1).join('|')}$`)
 const topline = (fs.readFileSync(`src/main/App.6.js`)+'').split('\n')[0]
 const [
     x1          // four slashes
@@ -98,7 +99,7 @@ if (! /^[A-Z][a-zA-Z]+$/.test(projectTC) )
     return console.warn(`App.6.js’s topline title '${projectTC}' is invalid`)
 if (! rxV.test(projectV) )
     return console.warn(`App.6.js’s topline version '${projectV}' is invalid`)
-if (! /^January|February|March|April|May|June|July|August|September|October|November|December$/.test(projectMth) )
+if (! rxMth.test(projectMth) )
     return console.warn(`App.6.js’s topline month '${projectMth}' is invalid`)
 if (! /^20\d\d$/.test(projectYYYY) )
     return console.warn(`App.6.js’s topline year '${projectYYYY}' is invalid`)
@@ -245,7 +246,16 @@ srcPaths.forEach( path => {
 
     fs.writeFileSync( path, out.join('\n') )
 })
-return
+
+
+
+
+//// FINISH
+
+
+//// Show the result.
+console.log(`Bumped from ${projectV} to ${newV}`)
+
 
 
 

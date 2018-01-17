@@ -1,7 +1,7 @@
 !function () { 'use strict'
 
 const NAME     = 'Oomtility Alias'
-    , VERSION  = '1.0.8'
+    , VERSION  = '1.0.11'
     , HOMEPAGE = 'http://oomtility.loop.coop'
 
     , HELP =
@@ -38,10 +38,12 @@ This script belongs to ${HOMEPAGE}
 
 
 //// Validate the environment.
-if ( '/oomtility/alias.js' !== process.argv[1].slice(-19) )
+const nodePath = process.argv.shift()
+const selfPath = process.argv.shift()
+if ( '/oomtility/alias.js' !== selfPath.slice(-19) )
     return console.warn('Unexpected environment!')
-if ( ( process.cwd() !== process.argv[1].slice(0,-19) ) )
-    return console.warn('Unexpected CWD, try:\n  $ cd /path/to/your/oom/repo/')
+if ( ( process.cwd() !== selfPath.slice(0,-19) ) )
+    return console.warn(`Unexpected CWD, try:\n  $ cd ${selfPath.slice(0,-19)}`)
 if ('function' !== typeof require)
     return console.warn('Use Node.js instead:\n  $ node oomtility/alias.js')
 

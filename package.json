@@ -1,6 +1,6 @@
 {
   "name": "oom-hub",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "The event hub at the centre of Oom",
   "main": "dist/main/oom-hub.min.5.js",
   "directories": {
