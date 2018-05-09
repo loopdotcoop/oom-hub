@@ -27,10 +27,12 @@ test('The OomHub class', () => {
     is('OomHub' === Class.NAME, 'NAME as expected')
     is('1.0.2' === Class.VERSION, 'VERSION as expected') // OOMBUMPABLE
     is('http://oom-hub.loop.coop/' === Class.HOMEPAGE, 'HOMEPAGE as expected')
+
+    let instance = new Class()
+    is(instance instanceof Class, 'instance as expected')
 })
 
 
 
 
 })
-

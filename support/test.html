@@ -134,6 +134,11 @@
 
 <!-- CONTENT -->
 
+<!-- Container for test-output -->
+<style>.kludjs li { list-style: none; }</style>
+<section class="row">
+  <div class="kludjs col-12"></div>
+</section>
 
 <!-- Load the assertion library and its reporter -->
 <script src="asset/js/klud.min.js"></script>
@@ -159,6 +164,7 @@
 //// This dynamic section is kept up to date by ‘oomtility/make.js’ ////////////
 
     , [ null, null, null, '../src/test/App-universal.6.js' ]
+    , [ null, null, null, '../src/test/App.register-universal.6.js' ]
 
 //// END DYNAMIC SECTION ///////////////////////////////////////////////////////
 

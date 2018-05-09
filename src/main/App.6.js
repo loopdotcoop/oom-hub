@@ -16,7 +16,7 @@ const TOOLKIT = OOM.TOOLKIT = OOM.TOOLKIT || {}
 
 
 //// Define `OomHub`, this module’s main entry point.
-const OomHub = OOM.OomHub = class {
+const Class = OOM.OomHub = class {
 
     constructor (config={}, hub=OOM.hub) {
 
@@ -141,7 +141,7 @@ const OomHub = OOM.OomHub = class {
 
 
 //// Add static constants to the `OomHub` class.
-Object.defineProperties(OomHub, META)
+Object.defineProperties(Class, META)
 
 
 
@@ -204,4 +204,3 @@ function rndCh (s, e) { return String.fromCharCode(Math.random() * (e-s) + s) }
 
 
 }( 'object' === typeof global ? global : this ) // `window` in a browser
-
